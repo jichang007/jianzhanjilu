@@ -1,8 +1,5 @@
 # Workbuddy搭建博客的全过程记录（真实建站实录-踩坑记录）
 
----
-title: 一次真实建站实录-踩坑记录
----
 
 > 这篇文章是我自己搭这个博客的全过程记录。不是教程式的「第一步第二步」，而是把当时真实的决策、真实的报错、以及排查了半天才找到的几个坑，按顺序写下来。如果你也打算用「静态页面 + 云数据库」的方式建站，这里的每一条大概都能帮你省几个小时。
 
@@ -26,7 +23,7 @@ title: 一次真实建站实录-踩坑记录
 
 ```
 tech-blog/
-├── [index.html](https://tech-blog-81910.app.workbuddy.host/index.html)      # 列表：精选 + 卡片流 + 搜索 + 标签筛选 + 分页 + 侧栏
+├── [index.html]     # 列表：精选 + 卡片流 + 搜索 + 标签筛选 + 分页 + 侧栏
 ├── post.html       # 详情：Markdown 正文 + 目录 + 代码高亮 + 附件 + 相关阅读
 ├── tags.html       # 标签：按标签分组聚合
 ├── about.html      # 关于：[站长资料](https://tech-blog-81910.app.workbuddy.host/about.html)
@@ -36,8 +33,8 @@ tech-blog/
     ├── cloud.js    # 云客户端封装 + Markdown 管线 + 导航页脚 + 工具函数
     └── style.css   # 设计系统
 ```
-
 `cloud.js` 是一个大 IIFE（立即执行函数），作用域内的能力统一挂到全局的 `window.Blog` 上，其余页面 `<script>` 直接调 `Blog.xxx()`。
+> 看网页效果：https://tech-blog-81910.app.workbuddy.host/index.html
 
 ——「IIFE」和「统一挂到全局」，后面各会变成一个坑。
 
@@ -236,7 +233,7 @@ select lower(btrim(u.email)) from auth.users u where u.sub = target_owner
 
 ### 坑 7：关于页被协作者顶掉了
 
-**现象**：关于页（https://tech-blog-81910.app.workbuddy.host/about.html）显示的是协作者的资料，不是站长的。
+**现象**：关于页( https://tech-blog-81910.app.workbuddy.host/about.html )显示的是协作者的资料，不是站长的。
 
 **原因**：关于页资料按「最近更新优先」取一条。单作者的时候这没问题；**多作者之后，「最近更新的人」和「站长」就不再是同一个人了**——协作者一改资料，站长就被顶下去了。
 
